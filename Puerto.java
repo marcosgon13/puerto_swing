@@ -1,3 +1,4 @@
+//Marcos Gonzalez Palazon
 package PaqB11;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class Puerto {
     private FormularioContenedores formulario;
     private JTable tablaContenedores;
     private JPanel panelCuadricula = new JPanel(new GridLayout(10, 12));
+    private int pesoTotal;
 
     public Puerto() {
         // Crear el hub con una capacidad de 10 filas y 12 columnas
@@ -71,6 +73,10 @@ public class Puerto {
         JButton desapilarButton = new JButton("Desapilar");
         operacionesPanel.add(apilarButton);
         operacionesPanel.add(desapilarButton);
+
+        // Crear boton con el texto "peso total del hub
+        JButton pesoTotalButton = new JButton("Peso total del hub");
+        operacionesPanel.add(pesoTotalButton);
 
         // Crear la cuadrícula de 10x12
         for (int i = 1; i <= 120; i++) {
@@ -159,6 +165,21 @@ public class Puerto {
                     datosTextArea.setText("");
                 }
             }
+        });
+
+        pesoTotalButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Creare una matriz que vaya recorriendo el hub y sumando los pesos de cada contenedor
+                    int peso = 0;
+                    for (int fila = 0; fila < 10; fila++) {
+                        for (int columna = 0; columna < 12; columna++) {
+                            if (contenedores[fila][columna] != null){
+                                int pesoPorContenedor = hub.getContenedor(fila,columna);
+                                peso = peso + pesoPorContenedor;
+                            }
+                        }
+                    }
+                }
         });
 
         // Configurar el JTextArea de la columna para que solo acepte números
